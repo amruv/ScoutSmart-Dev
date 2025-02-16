@@ -1,11 +1,152 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import { MessageSquare, BarChart2, Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
+  const [message, setMessage] = useState("");
+
+  const conversations = [
+    { id: 1, title: "Talent Analysis - U21 Forwards", date: "2024-03-10" },
+    { id: 2, title: "Premier League Midfielders", date: "2024-03-09" },
+    { id: 3, title: "South American Prospects", date: "2024-03-08" },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="flex h-screen bg-white">
+      {/* Left Sidebar */}
+      <div
+        className={cn(
+          "fixed left-0 top-0 h-full w-80 bg-gray-50 border-r border-gray-200 transition-all duration-300 ease-in-out z-20",
+          leftSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h1 className="text-xl font-semibold">Baller Search</h1>
+          <button
+            onClick={() => setLeftSidebarOpen(false)}
+            className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <div className="p-4">
+          <button className="w-full px-4 py-2 text-left text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors">
+            New Chat
+          </button>
+          <div className="mt-4 space-y-2">
+            {conversations.map((conv) => (
+              <div
+                key={conv.id}
+                className="p-3 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <MessageSquare className="h-5 w-5 text-gray-500" />
+                  <div>
+                    <p className="text-sm font-medium truncate">{conv.title}</p>
+                    <p className="text-xs text-gray-500">{conv.date}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className={cn(
+        "flex-1 transition-all duration-300 ease-in-out",
+        leftSidebarOpen ? "ml-80" : "ml-0",
+        rightSidebarOpen ? "mr-80" : "mr-0"
+      )}>
+        <div className="fixed top-4 left-4 z-30">
+          {!leftSidebarOpen && (
+            <button
+              onClick={() => setLeftSidebarOpen(true)}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          )}
+        </div>
+        <div className="fixed top-4 right-4 z-30">
+          {!rightSidebarOpen && (
+            <button
+              onClick={() => setRightSidebarOpen(true)}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <BarChart2 className="h-5 w-5" />
+            </button>
+          )}
+        </div>
+        <div className="h-full flex flex-col">
+          <div className="flex-1 p-4 overflow-y-auto">
+            <div className="max-w-3xl mx-auto space-y-4">
+              <div className="p-4 bg-gray-50 rounded-lg animate-fade-in">
+                <p className="text-sm">
+                  Hello! I'm your football scouting assistant. I can help you analyze players,
+                  identify talent, and provide detailed scouting reports. What would you like
+                  to explore today?
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-200 p-4">
+            <div className="max-w-3xl mx-auto">
+              <form className="flex space-x-4" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Ask about player analysis, scouting reports, or talent identification..."
+                  className="flex-1 p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Sidebar */}
+      <div
+        className={cn(
+          "fixed right-0 top-0 h-full w-80 bg-gray-50 border-l border-gray-200 transition-all duration-300 ease-in-out z-20",
+          rightSidebarOpen ? "translate-x-0" : "translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h2 className="text-xl font-semibold">Analytics</h2>
+          <button
+            onClick={() => setRightSidebarOpen(false)}
+            className="p-2 hover:bg-gray-200 rounded-full transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <div className="p-4">
+          <div className="space-y-4">
+            <div className="p-4 bg-white rounded-lg border border-gray-200">
+              <h3 className="text-sm font-medium mb-2">Player Stats</h3>
+              <div className="h-40 bg-gray-100 rounded-lg flex items-center justify-center">
+                <p className="text-sm text-gray-500">Select a player to view stats</p>
+              </div>
+            </div>
+            <div className="p-4 bg-white rounded-lg border border-gray-200">
+              <h3 className="text-sm font-medium mb-2">Performance Analysis</h3>
+              <div className="h-40 bg-gray-100 rounded-lg flex items-center justify-center">
+                <p className="text-sm text-gray-500">Select metrics to analyze</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
