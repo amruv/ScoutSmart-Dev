@@ -25,7 +25,7 @@ const Index = () => {
           >
             {leftSidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-          <h1 className="text-xl font-semibold" style={{ textAlign: 'center' }}>Finding Ballers</h1>
+          <h1 className="text-xl font-semibold text-center">Finding Ballers</h1>
         </div>
         <button
           onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
