@@ -10,46 +10,85 @@ interface Message {
   timestamp: Date;
 }
 
+interface Conversation {
+  id: number;
+  title: string;
+  date: string;
+  messages: Message[];
+}
+
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([
+  const [activeConversationId, setActiveConversationId] = useState(1);
+  const [conversations, setConversations] = useState<Conversation[]>([
     {
       id: 1,
-      content: "Hello! I'm your football scouting assistant. I can help you analyze players, identify talent, and provide detailed scouting reports. What would you like to explore today?",
-      isUser: false,
-      timestamp: new Date(),
+      title: "Talent Analysis - U21 Forwards",
+      date: "2024-03-10",
+      messages: [
+        {
+          id: 1,
+          content: "Hello! I'm your football scouting assistant. I can help you analyze players, identify talent, and provide detailed scouting reports. What would you like to explore today?",
+          isUser: false,
+          timestamp: new Date(),
+        },
+      ],
     },
+    { id: 2, title: "Premier League Midfielders", date: "2024-03-09", messages: [] },
+    { id: 3, title: "South American Prospects", date: "2024-03-08", messages: [] },
   ]);
 
-  const conversations = [
-    { id: 1, title: "Talent Analysis - U21 Forwards", date: "2024-03-10" },
-    { id: 2, title: "Premier League Midfielders", date: "2024-03-09" },
-    { id: 3, title: "South American Prospects", date: "2024-03-08" },
-  ];
+  const activeConversation = conversations.find(c => c.id === activeConversationId);
+  const messages = activeConversation?.messages || [];
+
+  const handleNewChat = () => {
+    const newId = Math.max(...conversations.map(c => c.id)) + 1;
+    const newConversation: Conversation = {
+      id: newId,
+      title: `New Chat ${newId}`,
+      date: new Date().toISOString().split('T')[0],
+      messages: [
+        {
+          id: 1,
+          content: "Hello! I'm your football scouting assistant. I can help you analyze players, identify talent, and provide detailed scouting reports. What would you like to explore today?",
+          isUser: false,
+          timestamp: new Date(),
+        },
+      ],
+    };
+    setConversations([newConversation, ...conversations]);
+    setActiveConversationId(newId);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
 
-    // Add user message
-    const userMessage: Message = {
-      id: messages.length + 1,
-      content: message,
-      isUser: true,
-      timestamp: new Date(),
-    };
+    const updatedConversations = conversations.map(conv => {
+      if (conv.id === activeConversationId) {
+        const userMessage: Message = {
+          id: conv.messages.length + 1,
+          content: message,
+          isUser: true,
+          timestamp: new Date(),
+        };
+        const assistantMessage: Message = {
+          id: conv.messages.length + 2,
+          content: "I understand you're interested in football scouting. Let me analyze that for you...",
+          isUser: false,
+          timestamp: new Date(),
+        };
+        return {
+          ...conv,
+          messages: [...conv.messages, userMessage, assistantMessage],
+        };
+      }
+      return conv;
+    });
 
-    // Add assistant response (placeholder for now)
-    const assistantMessage: Message = {
-      id: messages.length + 2,
-      content: "I understand you're interested in football scouting. Let me analyze that for you...",
-      isUser: false,
-      timestamp: new Date(),
-    };
-
-    setMessages([...messages, userMessage, assistantMessage]);
+    setConversations(updatedConversations);
     setMessage("");
   };
 
@@ -82,20 +121,35 @@ const Index = () => {
         )}
       >
         <div className="p-4">
-          <button className="w-full px-4 py-2 text-left text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors">
+          <button 
+            onClick={handleNewChat}
+            className="w-full px-4 py-2 text-left text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors"
+          >
             New Chat
           </button>
           <div className="mt-4 space-y-2">
             {conversations.map((conv) => (
               <div
                 key={conv.id}
-                className="p-3 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors"
+                onClick={() => setActiveConversationId(conv.id)}
+                className={cn(
+                  "p-3 rounded-lg cursor-pointer transition-colors",
+                  activeConversationId === conv.id
+                    ? "bg-black text-white"
+                    : "hover:bg-gray-200"
+                )}
               >
                 <div className="flex items-center space-x-3">
-                  <MessageSquare className="h-5 w-5 text-gray-500" />
+                  <MessageSquare className={cn(
+                    "h-5 w-5",
+                    activeConversationId === conv.id ? "text-white" : "text-gray-500"
+                  )} />
                   <div>
                     <p className="text-sm font-medium truncate">{conv.title}</p>
-                    <p className="text-xs text-gray-500">{conv.date}</p>
+                    <p className={cn(
+                      "text-xs",
+                      activeConversationId === conv.id ? "text-white/70" : "text-gray-500"
+                    )}>{conv.date}</p>
                   </div>
                 </div>
               </div>
