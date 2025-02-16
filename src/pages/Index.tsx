@@ -1,7 +1,7 @@
-
 import { useState } from "react";
 import { MessageSquare, BarChart2, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PlayerNameCarousel } from "@/components/PlayerNameCarousel";
 
 interface Message {
   id: number;
@@ -17,6 +17,8 @@ interface Conversation {
   messages: Message[];
 }
 
+const LEGENDARY_PLAYERS = ["Lionel Messi", "Cristiano Ronaldo", "Reece James"];
+
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
@@ -27,14 +29,7 @@ const Index = () => {
       id: 1,
       title: "Talent Analysis - U21 Forwards",
       date: "2024-03-10",
-      messages: [
-        {
-          id: 1,
-          content: "Hello! I'm your football scouting assistant. I can help you analyze players, identify talent, and provide detailed scouting reports. What would you like to explore today?",
-          isUser: false,
-          timestamp: new Date(),
-        },
-      ],
+      messages: [],
     },
     { id: 2, title: "Premier League Midfielders", date: "2024-03-09", messages: [] },
     { id: 3, title: "South American Prospects", date: "2024-03-08", messages: [] },
@@ -49,14 +44,7 @@ const Index = () => {
       id: newId,
       title: `New Chat ${newId}`,
       date: new Date().toISOString().split('T')[0],
-      messages: [
-        {
-          id: 1,
-          content: "Hello! I'm your football scouting assistant. I can help you analyze players, identify talent, and provide detailed scouting reports. What would you like to explore today?",
-          isUser: false,
-          timestamp: new Date(),
-        },
-      ],
+      messages: [],
     };
     setConversations([newConversation, ...conversations]);
     setActiveConversationId(newId);
@@ -94,7 +82,6 @@ const Index = () => {
 
   return (
     <div className="flex flex-col h-screen bg-white">
-      {/* Top Banner */}
       <div className="fixed top-0 left-0 right-0 h-16 bg-black text-white z-30 flex items-center justify-between px-4 shadow-md">
         <div className="flex items-center space-x-4">
           <button
@@ -113,7 +100,6 @@ const Index = () => {
         </button>
       </div>
 
-      {/* Left Sidebar */}
       <div
         className={cn(
           "fixed left-0 top-16 h-[calc(100%-4rem)] w-80 bg-gray-50 border-r border-gray-200 transition-all duration-300 ease-in-out z-20",
@@ -158,7 +144,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className={cn(
         "flex-1 transition-all duration-300 ease-in-out mt-16",
         leftSidebarOpen ? "ml-80" : "ml-0",
@@ -167,18 +152,27 @@ const Index = () => {
         <div className="h-full flex flex-col">
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="max-w-3xl mx-auto space-y-6">
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={cn(
-                    "p-4 rounded-lg animate-fade-in",
-                    msg.isUser ? "bg-black text-white ml-auto" : "bg-gray-50"
-                  )}
-                  style={{ maxWidth: "85%" }}
-                >
-                  <p className="text-sm">{msg.content}</p>
+              {messages.length > 0 ? (
+                messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={cn(
+                      "p-4 rounded-lg animate-fade-in",
+                      msg.isUser ? "bg-black text-white ml-auto" : "bg-gray-50"
+                    )}
+                    style={{ maxWidth: "85%" }}
+                  >
+                    <p className="text-sm">{msg.content}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center text-gray-600 mt-8">
+                  <p className="text-lg">
+                    Which baller will you find who'll turn out to be the next{" "}
+                    <PlayerNameCarousel players={LEGENDARY_PLAYERS} />
+                  </p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
           <div className="border-t border-gray-200 p-4">
@@ -203,7 +197,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Right Sidebar */}
       <div
         className={cn(
           "fixed right-0 top-16 h-[calc(100%-4rem)] w-80 bg-gray-50 border-l border-gray-200 transition-all duration-300 ease-in-out z-20",
