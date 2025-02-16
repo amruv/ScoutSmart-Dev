@@ -3,16 +3,55 @@ import { useState } from "react";
 import { MessageSquare, BarChart2, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+interface Message {
+  id: number;
+  content: string;
+  isUser: boolean;
+  timestamp: Date;
+}
+
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 1,
+      content: "Hello! I'm your football scouting assistant. I can help you analyze players, identify talent, and provide detailed scouting reports. What would you like to explore today?",
+      isUser: false,
+      timestamp: new Date(),
+    },
+  ]);
 
   const conversations = [
     { id: 1, title: "Talent Analysis - U21 Forwards", date: "2024-03-10" },
     { id: 2, title: "Premier League Midfielders", date: "2024-03-09" },
     { id: 3, title: "South American Prospects", date: "2024-03-08" },
   ];
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!message.trim()) return;
+
+    // Add user message
+    const userMessage: Message = {
+      id: messages.length + 1,
+      content: message,
+      isUser: true,
+      timestamp: new Date(),
+    };
+
+    // Add assistant response (placeholder for now)
+    const assistantMessage: Message = {
+      id: messages.length + 2,
+      content: "I understand you're interested in football scouting. Let me analyze that for you...",
+      isUser: false,
+      timestamp: new Date(),
+    };
+
+    setMessages([...messages, userMessage, assistantMessage]);
+    setMessage("");
+  };
 
   return (
     <div className="flex flex-col h-screen bg-white">
@@ -73,19 +112,24 @@ const Index = () => {
       )}>
         <div className="h-full flex flex-col">
           <div className="flex-1 p-4 overflow-y-auto">
-            <div className="max-w-3xl mx-auto space-y-4">
-              <div className="p-4 bg-gray-50 rounded-lg animate-fade-in">
-                <p className="text-sm">
-                  Hello! I'm your football scouting assistant. I can help you analyze players,
-                  identify talent, and provide detailed scouting reports. What would you like
-                  to explore today?
-                </p>
-              </div>
+            <div className="max-w-3xl mx-auto space-y-6">
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={cn(
+                    "p-4 rounded-lg animate-fade-in",
+                    msg.isUser ? "bg-black text-white ml-auto" : "bg-gray-50"
+                  )}
+                  style={{ maxWidth: "85%" }}
+                >
+                  <p className="text-sm">{msg.content}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div className="border-t border-gray-200 p-4">
             <div className="max-w-3xl mx-auto">
-              <form className="flex space-x-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex space-x-4" onSubmit={handleSubmit}>
                 <input
                   type="text"
                   value={message}
