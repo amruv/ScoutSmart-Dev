@@ -34,6 +34,8 @@ export const PlayerNameCarousel = ({ players }: PlayerNameCarouselProps) => {
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
+          display: "inline-block",  // Add this to ensure the text is visible
+          fontWeight: "bold"        // Make the text bold for better visibility
         }}
       >
         {players[currentIndex]}
