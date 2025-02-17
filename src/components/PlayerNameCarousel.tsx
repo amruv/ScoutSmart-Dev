@@ -16,30 +16,30 @@ export const PlayerNameCarousel = ({ players }: PlayerNameCarouselProps) => {
       setTimeout(() => {
         setCurrentIndex((current) => (current + 1) % players.length);
         setIsTransitioning(false);
-      }, 500); // Half of the transition time
+      }, 500);
     }, 5000);
 
     return () => clearInterval(interval);
   }, [players.length]);
 
   return (
-    <div className="relative h-8 overflow-hidden inline-block align-bottom">
+    <span className="inline-flex min-w-[200px] h-8 items-center overflow-hidden relative">
       <span
         className={cn(
-          "absolute left-0 transition-all duration-500 ease-in-out",
-          isTransitioning ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
+          "absolute inset-0 transition-all duration-500 ease-in-out flex items-center",
+          isTransitioning ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
         )}
         style={{
           background: "linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%, rgba(246,219,245,1) 89%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
-          display: "inline-block",  // Add this to ensure the text is visible
-          fontWeight: "bold"        // Make the text bold for better visibility
+          fontWeight: "bold",
+          whiteSpace: "nowrap"
         }}
       >
         {players[currentIndex]}
       </span>
-    </div>
+    </span>
   );
 };
