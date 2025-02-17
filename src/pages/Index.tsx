@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
@@ -11,7 +12,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import type { Conversation } from "@/types/chat";
+import type { Conversation, Message } from "@/types/chat";
 
 const LEGENDARY_PLAYERS = ["Lionel Messi", "Cristiano Ronaldo", "Reece James"];
 
