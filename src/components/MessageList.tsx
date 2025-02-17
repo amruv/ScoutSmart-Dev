@@ -27,9 +27,12 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
           </div>
         ))
       ) : (
-        <div className="text-center text-gray-600 mt-8">
-          <p className="text-lg">
-            Which baller will you find who'll turn out to be the next{" "}
+        <div className="text-center mt-8">
+          <p className={cn(
+            "text-lg flex items-center justify-center gap-2",
+            isDarkMode ? "text-white" : "text-gray-600"
+          )}>
+            <span>Which baller will you find who'll turn out to be the next</span>
             <PlayerNameCarousel players={LEGENDARY_PLAYERS} />
           </p>
         </div>

@@ -1,7 +1,15 @@
 
-import { MessageSquare, MoreVertical } from "lucide-react";
+import { MessageSquare, MoreVertical, Trash, Edit2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Conversation } from "@/types/chat";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 interface ChatListProps {
   conversations: Conversation[];
@@ -9,6 +17,7 @@ interface ChatListProps {
   isDarkMode: boolean;
   onChatSelect: (id: number) => void;
   onRename: (conversation: Conversation) => void;
+  onDelete?: (conversation: Conversation) => void;
 }
 
 export const ChatList = ({
@@ -17,7 +26,26 @@ export const ChatList = ({
   isDarkMode,
   onChatSelect,
   onRename,
+  onDelete,
 }: ChatListProps) => {
+  const [menuOpen, setMenuOpen] = useState<number | null>(null);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
+
+  const handleDelete = (conversation: Conversation) => {
+    setSelectedConversation(conversation);
+    setDeleteConfirmOpen(true);
+    setMenuOpen(null);
+  };
+
+  const confirmDelete = () => {
+    if (selectedConversation && onDelete) {
+      onDelete(selectedConversation);
+      setDeleteConfirmOpen(false);
+      setSelectedConversation(null);
+    }
+  };
+
   return (
     <div className="mt-4 space-y-2">
       {conversations.map((conv) => (
@@ -48,19 +76,81 @@ export const ChatList = ({
               )}>{conv.date}</p>
             </div>
           </div>
-          <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="relative">
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onRename(conv);
+                setMenuOpen(menuOpen === conv.id ? null : conv.id);
               }}
-              className="p-1 hover:bg-gray-700 rounded"
+              className={cn(
+                "p-1 rounded transition-colors",
+                isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-300"
+              )}
             >
               <MoreVertical className="h-4 w-4" />
             </button>
+            {menuOpen === conv.id && (
+              <div className={cn(
+                "absolute right-0 mt-1 py-1 w-32 rounded-lg shadow-lg z-10",
+                isDarkMode ? "bg-gray-800" : "bg-white"
+              )}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRename(conv);
+                    setMenuOpen(null);
+                  }}
+                  className={cn(
+                    "w-full px-3 py-1 text-left text-sm flex items-center space-x-2",
+                    isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                  )}
+                >
+                  <Edit2 className="h-4 w-4" />
+                  <span>Rename</span>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(conv);
+                  }}
+                  className={cn(
+                    "w-full px-3 py-1 text-left text-sm flex items-center space-x-2",
+                    isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                  )}
+                >
+                  <Trash className="h-4 w-4" />
+                  <span>Delete</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       ))}
+
+      <Dialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Chat</DialogTitle>
+          </DialogHeader>
+          <div className="p-4">
+            <p>Are you sure you want to delete this chat?</p>
+          </div>
+          <DialogFooter className="flex justify-end space-x-2">
+            <button
+              onClick={() => setDeleteConfirmOpen(false)}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={confirmDelete}
+              className="px-4 py-2 text-sm font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100"
+            >
+              Delete
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
