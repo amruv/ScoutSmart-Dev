@@ -12,6 +12,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import type { Conversation, Message } from "@/types/chat";
+import { ProfileBanner } from "@/components/ProfileBanner";
 
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
@@ -109,6 +110,14 @@ const Index = () => {
     setMessage("");
   };
 
+  const handleLogout = () => {
+    console.log("Logout clicked");
+  };
+
+  const handleSettings = () => {
+    console.log("Settings clicked");
+  };
+
   return (
     <div className={cn(
       "flex flex-col h-screen transition-colors duration-200",
@@ -130,7 +139,7 @@ const Index = () => {
           leftSidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="p-4">
+        <div className="p-4 h-full relative">
           <button 
             onClick={handleNewChat}
             className="w-full px-4 py-2 text-left text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition-colors"
@@ -143,6 +152,12 @@ const Index = () => {
             isDarkMode={isDarkMode}
             onChatSelect={setActiveConversationId}
             onRename={handleRename}
+            onDelete={handleDelete}
+          />
+          <ProfileBanner 
+            isDarkMode={isDarkMode}
+            onLogout={handleLogout}
+            onSettings={handleSettings}
           />
         </div>
       </div>
