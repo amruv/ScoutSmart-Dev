@@ -56,7 +56,7 @@ export const ChatList = ({
             activeConversationId === conv.id
               ? "bg-black text-white"
               : isDarkMode 
-                ? "hover:bg-gray-700" 
+                ? "hover:bg-gray-700 text-gray-100" 
                 : "hover:bg-gray-200"
           )}
         >
@@ -66,13 +66,13 @@ export const ChatList = ({
           >
             <MessageSquare className={cn(
               "h-5 w-5",
-              activeConversationId === conv.id ? "text-white" : "text-gray-500"
+              activeConversationId === conv.id ? "text-white" : isDarkMode ? "text-gray-300" : "text-gray-500"
             )} />
             <div>
               <p className="text-sm font-medium truncate">{conv.title}</p>
               <p className={cn(
                 "text-xs",
-                activeConversationId === conv.id ? "text-white/70" : "text-gray-500"
+                activeConversationId === conv.id ? "text-white/70" : isDarkMode ? "text-gray-300" : "text-gray-500"
               )}>{conv.date}</p>
             </div>
           </div>
@@ -84,7 +84,7 @@ export const ChatList = ({
               }}
               className={cn(
                 "p-1 rounded transition-colors",
-                isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-300"
+                isDarkMode ? "hover:bg-gray-600 text-gray-300" : "hover:bg-gray-300"
               )}
             >
               <MoreVertical className="h-4 w-4" />
@@ -92,7 +92,7 @@ export const ChatList = ({
             {menuOpen === conv.id && (
               <div className={cn(
                 "absolute right-0 mt-1 py-1 w-32 rounded-lg shadow-lg z-10",
-                isDarkMode ? "bg-gray-800" : "bg-white"
+                isDarkMode ? "bg-gray-800 text-gray-100" : "bg-white"
               )}>
                 <button
                   onClick={(e) => {

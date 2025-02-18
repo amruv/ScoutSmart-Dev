@@ -186,24 +186,36 @@ const Index = () => {
               "p-4 rounded-lg border",
               isDarkMode ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
             )}>
-              <h3 className="text-sm font-medium mb-2">Player Stats</h3>
+              <h3 className={cn(
+                "text-sm font-medium mb-2",
+                isDarkMode ? "text-gray-100" : "text-gray-900"
+              )}>Player Stats</h3>
               <div className={cn(
                 "h-40 rounded-lg flex items-center justify-center",
                 isDarkMode ? "bg-gray-800" : "bg-gray-100"
               )}>
-                <p className="text-sm text-gray-500">Select a player to view stats</p>
+                <p className={cn(
+                  "text-sm",
+                  isDarkMode ? "text-gray-400" : "text-gray-500"
+                )}>Select a player to view stats</p>
               </div>
             </div>
             <div className={cn(
               "p-4 rounded-lg border",
               isDarkMode ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
             )}>
-              <h3 className="text-sm font-medium mb-2">Performance Analysis</h3>
+              <h3 className={cn(
+                "text-sm font-medium mb-2",
+                isDarkMode ? "text-gray-100" : "text-gray-900"
+              )}>Performance Analysis</h3>
               <div className={cn(
                 "h-40 rounded-lg flex items-center justify-center",
                 isDarkMode ? "bg-gray-800" : "bg-gray-100"
               )}>
-                <p className="text-sm text-gray-500">Select metrics to analyze</p>
+                <p className={cn(
+                  "text-sm",
+                  isDarkMode ? "text-gray-400" : "text-gray-500"
+                )}>Select metrics to analyze</p>
               </div>
             </div>
           </div>
