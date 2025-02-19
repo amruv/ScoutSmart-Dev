@@ -32,9 +32,8 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
             "text-lg inline-flex flex-wrap items-center justify-center gap-1",
             isDarkMode ? "text-white" : "text-gray-600"
           )}>
-            <span>Which baller will you find who'll turn out to be the next</span>
+            <span>Which baller will you find who'll turn out to be the next...</span>
             <PlayerNameCarousel players={LEGENDARY_PLAYERS} />
-            <span>next...</span>
           </p>
         </div>
       )}
