@@ -34,7 +34,7 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
           )}>
             <span>Which baller will you find who'll turn out to be the next</span>
             <PlayerNameCarousel players={LEGENDARY_PLAYERS} />
-            <span>?</span>
+            <span>next...</span>
           </p>
         </div>
       )}
