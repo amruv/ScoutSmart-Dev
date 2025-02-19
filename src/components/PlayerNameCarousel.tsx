@@ -23,10 +23,10 @@ export const PlayerNameCarousel = ({ players }: PlayerNameCarouselProps) => {
   }, [players.length]);
 
   return (
-    <span className="inline-flex min-w-[200px] h-7 items-center overflow-hidden relative">
+    <span className="inline-flex min-w-[200px] h-12 items-center justify-center overflow-hidden relative">
       <span
         className={cn(
-          "absolute inset-0 transition-all duration-500 ease-in-out flex items-center",
+          "absolute transition-all duration-500 ease-in-out flex items-center text-2xl",
           isTransitioning ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
         )}
         style={{
