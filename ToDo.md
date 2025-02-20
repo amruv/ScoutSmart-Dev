@@ -1,6 +1,9 @@
 # Things to implement
 
-That's great, now in the list of player's for the Carousel, can you populate the list with 1000 famous football players - past and present and with a 9:1 ratio of men and women players
+Can you make this visible in dark mode please.
+![Description](Images/changetext.png)
+
+Remove the player search bar and the stats grid.
 
 -Working On Backend
 
