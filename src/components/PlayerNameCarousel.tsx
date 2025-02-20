@@ -23,23 +23,24 @@ export const PlayerNameCarousel = ({ players }: PlayerNameCarouselProps) => {
   }, [players.length]);
 
   return (
-    <span className="inline-flex min-w-[200px] h-12 items-center justify-center overflow-hidden relative">
+    <div className="inline-flex min-w-[300px] h-16 items-center justify-center overflow-hidden relative">
       <span
         className={cn(
-          "absolute transition-all duration-500 ease-in-out flex items-center text-2xl",
+          "absolute transition-all duration-500 ease-in-out flex items-center text-4xl font-bold",
           isTransitioning ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
         )}
         style={{
-          background: "linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%, rgba(246,219,245,1) 89%)",
+          backgroundImage: "linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%, rgba(246,219,245,1) 89%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
-          fontWeight: "bold",
+          backgroundSize: "200% 200%",
+          animation: "gradient-shift 3s ease infinite",
           whiteSpace: "nowrap"
         }}
       >
         {players[currentIndex]}
       </span>
-    </span>
+    </div>
   );
 };
