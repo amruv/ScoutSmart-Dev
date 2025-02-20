@@ -1,4 +1,3 @@
-<lov-code>
 import { cn } from "@/lib/utils";
 import { PlayerNameCarousel } from "@/components/PlayerNameCarousel";
 import type { Message } from "@/types/chat";
@@ -8,7 +7,32 @@ interface MessageListProps {
   isDarkMode: boolean;
 }
 
-const LEGENDARY_PLAYERS = [
+// Female Players (100)
+const FEMALE_PLAYERS = [
+  "Marta", "Megan Rapinoe", "Alex Morgan", "Sam Kerr", "Ada Hegerberg",
+  "Wendie Renard", "Lucy Bronze", "Vivianne Miedema", "Alexia Putellas", "Pernille Harder",
+  "Christine Sinclair", "Birgit Prinz", "Homare Sawa", "Abby Wambach", "Michelle Akers",
+  "Sun Wen", "Mia Hamm", "Carli Lloyd", "Beth Mead", "Mary Earps",
+  "Asisat Oshoala", "Caroline Graham Hansen", "Dzsenifer Marozsán", "Amandine Henry", "Lena Oberdorf",
+  "Aitana Bonmatí", "Keira Walsh", "Lauren James", "Trinity Rodman", "Rose Lavelle",
+  "Chloe Kelly", "Ella Toone", "Rachel Daly", "Georgia Stanway", "Millie Bright",
+  "Alexandra Popp", "Lena Goeßling", "Sara Däbritz", "Svenja Huth", "Merle Frohms",
+  "Marie-Antoinette Katoto", "Kadidiatou Diani", "Grace Geyoro", "Sakina Karchaoui", "Delphine Cascarino",
+  "Jennifer Hermoso", "Irene Paredes", "Patricia Guijarro", "Mariona Caldentey", "Sandra Paños",
+  "Kosovare Asllani", "Magdalena Eriksson", "Sofia Jakobsson", "Fridolina Rolfö", "Hedvig Lindahl",
+  "Saki Kumagai", "Mana Iwabuchi", "Yui Hasegawa", "Risa Shimizu", "Hina Sugita",
+  "Christiane Endler", "Debinha", "Formiga", "Tamires", "Andressa Alves",
+  "Ji So-yun", "Cho So-hyun", "Lee Geum-min", "Kim Jung-mi", "Jang Sel-gi",
+  "Steph Catley", "Ellie Carpenter", "Caitlin Foord", "Hayley Raso", "Emily van Egmond",
+  "Janine Beckie", "Jessie Fleming", "Ashley Lawrence", "Kadeisha Buchanan", "Jordyn Huitema",
+  "Barbara Bonansea", "Sara Gama", "Cristiana Girelli", "Laura Giuliani", "Valentina Giacinti",
+  "Caroline Seger", "Stina Blackstenius", "Nilla Fischer", "Linda Sembrant", "Olivia Schough",
+  "Sherida Spitse", "Lieke Martens", "Jackie Groenen", "Daniëlle van de Donk", "Stefanie van der Gragt",
+  "Wang Shuang", "Wu Haiyan", "Zhang Rui", "Peng Shimeng", "Tang Jiali"
+];
+
+// Male Players (900)
+const MALE_PLAYERS = [
   // Male Players (900)
   "Lionel Messi", "Cristiano Ronaldo", "Pelé", "Diego Maradona", "Johan Cruyff",
   "Franz Beckenbauer", "Zinedine Zidane", "Ronaldo Nazário", "Ronaldinho", "Eusébio",
@@ -186,113 +210,38 @@ const LEGENDARY_PLAYERS = [
     "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
     "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
     "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray",
-    "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins",
-    "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo",
-    "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole",
-    "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll",
-    "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin",
-    "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin",
-    "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa",
-    "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
-    "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
-    "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray",
-    "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins",
-    "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo",
-    "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole",
-    "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll",
-    "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin",
-    "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin",
-    "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa",
-    "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
-    "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
-    "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray",
-    "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins",
-    "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo",
-    "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole",
-    "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll",
-    "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin",
-    "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin",
-    "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa",
-    "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
-    "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
-    "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray",
-    "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins",
-    "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo",
-    "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole",
-    "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll",
-    "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin",
-    "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin",
-    "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa",
-    "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
-    "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
-    "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "
+    "Jay Rodriguez", "Rickie Lambert",
+];
+
+const LEGENDARY_PLAYERS = [...MALE_PLAYERS, ...FEMALE_PLAYERS];
+
+export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
+  return (
+    <div className="max-w-3xl mx-auto space-y-6">
+      {messages.length > 0 ? (
+        messages.map((msg) => (
+          <div
+            key={msg.id}
+            className={cn(
+              "p-4 rounded-lg animate-fade-in",
+              msg.isUser ? "bg-black text-white ml-auto" : isDarkMode ? "bg-gray-800" : "bg-gray-50"
+            )}
+            style={{ maxWidth: "85%" }}
+          >
+            <p className="text-sm">{msg.content}</p>
+          </div>
+        ))
+      ) : (
+        <div className="text-center mt-8">
+          <div className={cn(
+            "flex flex-col items-center justify-center gap-4",
+            isDarkMode ? "text-white" : "text-gray-600"
+          )}>
+            <p className="text-lg">Which baller will you find who'll turn out to be the next...</p>
+            <PlayerNameCarousel players={LEGENDARY_PLAYERS} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
