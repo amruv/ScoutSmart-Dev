@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
@@ -8,8 +9,6 @@ import { RightSidebar } from "@/components/RightSidebar";
 import { ChatDialogs } from "@/components/ChatDialogs";
 import { ProfileBanner } from "@/components/ProfileBanner";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
-import { StatsGrid } from "@/components/StatsGrid";
-import { SearchBar } from "@/components/SearchBar";
 import type { Conversation, Message } from "@/types/chat";
 
 const Index = () => {
@@ -138,7 +137,6 @@ const Index = () => {
         )}
       >
         <div className="p-4 h-full relative">
-          <SearchBar />
           <div className="mt-4">
             <button 
               onClick={handleNewChat}
@@ -171,7 +169,6 @@ const Index = () => {
       )}>
         <div className="h-full flex flex-col">
           <div className="flex-1 p-4 overflow-y-auto">
-            <StatsGrid />
             <MessageList messages={messages} isDarkMode={isDarkMode} />
           </div>
           <div className={cn(
