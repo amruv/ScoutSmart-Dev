@@ -6,6 +6,8 @@ import { ChatContainer } from "@/components/ChatContainer";
 import { ChatDialogs } from "@/components/ChatDialogs";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { useConversations } from "@/hooks/useConversations";
+import { useAuth } from "@/contexts/AuthContext";
+import type { Conversation } from "@/types/chat";
 
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
@@ -15,6 +17,8 @@ const Index = () => {
   const [renameDialogOpen, setRenameDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+
+  const { signOut } = useAuth();
 
   const {
     conversations,
@@ -60,10 +64,6 @@ const Index = () => {
     }
   };
 
-  const handleLogout = () => {
-    console.log("Logout clicked");
-  };
-
   const handleSettings = () => {
     console.log("Settings clicked");
   };
@@ -85,7 +85,7 @@ const Index = () => {
           onChatSelect={setActiveConversationId}
           onRename={handleRenameClick}
           onDelete={handleDeleteClick}
-          onLogout={handleLogout}
+          onLogout={signOut}
           onSettings={handleSettings}
         />
       }
