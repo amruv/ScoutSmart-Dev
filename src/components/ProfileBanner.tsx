@@ -28,14 +28,18 @@ export const ProfileBanner = ({
   useEffect(() => {
     const fetchProfile = async () => {
       if (user) {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('display_name')
-          .eq('id', user.id)
-          .single();
-        
-        if (data && !error) {
-          setDisplayName(data.display_name);
+        try {
+          const { data } = await supabase
+            .from('profiles')
+            .select('display_name')
+            .eq('id', user.id)
+            .maybeSingle();
+          
+          if (data?.display_name) {
+            setDisplayName(data.display_name);
+          }
+        } catch (error) {
+          console.error('Error fetching profile:', error);
         }
       }
     };
