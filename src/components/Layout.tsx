@@ -38,31 +38,33 @@ export const Layout = ({
         onDarkModeToggle={onDarkModeToggle}
       />
 
-      {/* Left Sidebar */}
-      <div
-        className={cn(
-          "fixed left-0 top-16 h-[calc(100%-4rem)] w-80 border-r transition-all duration-300 ease-in-out z-20",
-          isDarkMode ? "bg-gray-800 border-gray-700" : "bg-gray-50 border-gray-200",
-          leftSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        )}
-      >
-        {leftSidebar}
-      </div>
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Sidebar */}
+        <div
+          className={cn(
+            "fixed left-0 top-16 h-[calc(100vh-4rem)] w-80 border-r transition-all duration-300 ease-in-out z-20",
+            isDarkMode ? "bg-gray-800 border-gray-700" : "bg-gray-50 border-gray-200",
+            leftSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          )}
+        >
+          {leftSidebar}
+        </div>
 
-      {/* Main Content */}
-      <div className={cn(
-        "flex-1 transition-all duration-300 ease-in-out mt-16",
-        leftSidebarOpen ? "ml-80" : "ml-0",
-        rightSidebarOpen ? "mr-80" : "mr-0",
-        isDarkMode ? "bg-gray-900" : "bg-white"
-      )}>
-        {children}
-      </div>
+        {/* Main Content */}
+        <main className={cn(
+          "flex-1 h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out mt-16",
+          leftSidebarOpen ? "ml-80" : "ml-0",
+          rightSidebarOpen ? "mr-80" : "mr-0",
+          isDarkMode ? "bg-gray-900" : "bg-white"
+        )}>
+          {children}
+        </main>
 
-      <RightSidebar
-        isDarkMode={isDarkMode}
-        rightSidebarOpen={rightSidebarOpen}
-      />
+        <RightSidebar
+          isDarkMode={isDarkMode}
+          rightSidebarOpen={rightSidebarOpen}
+        />
+      </div>
     </div>
   );
 };

@@ -21,11 +21,11 @@ export const ChatContainer = ({
 }: ChatContainerProps) => {
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="flex-1 p-4 overflow-y-auto min-h-0">
         <MessageList messages={messages} isDarkMode={isDarkMode} />
       </div>
       <div className={cn(
-        "border-t p-4",
+        "border-t p-4 mt-auto",
         isDarkMode ? "border-gray-700" : "border-gray-200"
       )}>
         <div className="max-w-[75%] mx-auto">
