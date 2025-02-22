@@ -1,6 +1,9 @@
 
 import { Settings, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +22,36 @@ export const ProfileBanner = ({
   onLogout,
   onSettings,
 }: ProfileBannerProps) => {
+  const { user } = useAuth();
+  const [displayName, setDisplayName] = useState<string>("");
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('display_name')
+          .eq('id', user.id)
+          .single();
+        
+        if (data && !error) {
+          setDisplayName(data.display_name);
+        }
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <div className={cn(
       "absolute bottom-0 left-0 right-0 border-t p-4",
@@ -31,13 +64,13 @@ export const ProfileBanner = ({
             isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-200"
           )}>
             <div className="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center">
-              <span className="text-white text-sm">SA</span>
+              <span className="text-white text-sm">{getInitials(displayName || 'User')}</span>
             </div>
             <div className="flex-1 text-left">
               <p className={cn(
                 "text-sm font-medium",
                 isDarkMode ? "text-gray-100" : "text-gray-900"
-              )}>Sai Amruth</p>
+              )}>{displayName || 'User'}</p>
             </div>
           </div>
         </DropdownMenuTrigger>

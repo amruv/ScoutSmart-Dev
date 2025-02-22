@@ -9,7 +9,7 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
 
   if (user) {
     return <Navigate to="/" replace />;
@@ -20,7 +20,7 @@ const Auth = () => {
     if (isLogin) {
       await signIn(email, password);
     } else {
-      await signUp(email, password, username);
+      await signUp(email, password, displayName);
     }
   };
 
@@ -52,18 +52,18 @@ const Auth = () => {
             </div>
             {!isLogin && (
               <div>
-                <label htmlFor="username" className="sr-only">
-                  Username
+                <label htmlFor="display-name" className="sr-only">
+                  Display Name
                 </label>
                 <input
-                  id="username"
-                  name="username"
+                  id="display-name"
+                  name="display-name"
                   type="text"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Display Name"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
                 />
               </div>
             )}
