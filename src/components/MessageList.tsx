@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { PlayerNameCarousel } from "@/components/PlayerNameCarousel";
 import type { Message } from "@/types/chat";
@@ -224,7 +225,11 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
             key={msg.id}
             className={cn(
               "p-4 rounded-lg animate-fade-in",
-              msg.isUser ? "bg-black text-white ml-auto" : isDarkMode ? "bg-gray-800" : "bg-gray-50"
+              msg.isUser 
+                ? "bg-black text-white ml-auto" 
+                : isDarkMode 
+                  ? "bg-gray-800 text-gray-100" // Added text color for dark mode
+                  : "bg-gray-50"
             )}
             style={{ maxWidth: "85%" }}
           >
