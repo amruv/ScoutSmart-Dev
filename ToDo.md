@@ -1,9 +1,6 @@
 # Things to implement
 
-Can you make this visible in dark mode please.
-![Description](Images/changetext.png)
-
-That's great, For user sign up, instead of asking for username, can you ask for 'Display Name' and make the same changes in the Supabase tables. Also, can you make the profile name in the left pane the same as the Display Name of the user logging in (ie replace 'Sai Amruth' and the circle next to it with the Name of the user and their Initials in the circle).
+brother, can you fix the size and the scrolling in the dark mode ands also in this 100% zoom ratio, the page itself  shouldn't be scrollable in the website
 
 Also, time to connect chat with LLM response
 
