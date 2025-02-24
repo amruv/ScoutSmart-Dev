@@ -52,7 +52,7 @@ export const Layout = ({
 
         {/* Main Content */}
         <main className={cn(
-          "flex-1 h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out mt-16",
+          "flex-1 h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out",
           leftSidebarOpen ? "ml-80" : "ml-0",
           rightSidebarOpen ? "mr-80" : "mr-0",
           isDarkMode ? "bg-gray-900" : "bg-white"
