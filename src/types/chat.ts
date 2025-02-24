@@ -1,14 +1,19 @@
 
 export interface Message {
-  id: number;
+  id: string;
   content: string;
-  isUser: boolean;
-  timestamp: Date;
+  sender: 'USER' | 'LLM';
+  created_at: string;
+  chat_id: string;
+  profile_id: string;
 }
 
 export interface Conversation {
-  id: number;
+  id: string;
   title: string;
-  date: string;
+  created_at: string;
+  updated_at: string;
+  profile_id: string;
+  is_archived: boolean;
   messages: Message[];
 }

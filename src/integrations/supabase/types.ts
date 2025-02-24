@@ -9,6 +9,83 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          chat_id: string
+          content: string
+          created_at: string
+          id: string
+          profile_id: string
+          sender: Database["public"]["Enums"]["message_sender"]
+        }
+        Insert: {
+          chat_id: string
+          content: string
+          created_at?: string
+          id?: string
+          profile_id: string
+          sender: Database["public"]["Enums"]["message_sender"]
+        }
+        Update: {
+          chat_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          profile_id?: string
+          sender?: Database["public"]["Enums"]["message_sender"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_chat_id_fkey"
+            columns: ["chat_id"]
+            isOneToOne: false
+            referencedRelation: "chats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chat_messages_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chats: {
+        Row: {
+          created_at: string
+          id: string
+          is_archived: boolean | null
+          profile_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean | null
+          profile_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_archived?: boolean | null
+          profile_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chats_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -38,7 +115,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      message_sender: "USER" | "LLM"
     }
     CompositeTypes: {
       [_ in never]: never
