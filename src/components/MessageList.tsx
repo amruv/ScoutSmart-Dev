@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { PlayerNameCarousel } from "@/components/PlayerNameCarousel";
 import type { Message } from "@/types/chat";
@@ -159,58 +158,6 @@ const MALE_PLAYERS = [
     "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
     "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
     "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray",
-    "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins",
-    "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo",
-    "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole",
-    "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll",
-    "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin",
-    "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin",
-    "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa",
-    "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
-    "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
-    "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney",
-    "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney",
-    "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze",
-    "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe",
-    "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham",
-    "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin", "Glenn Murray",
-    "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins",
-    "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo",
-    "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke", "Carlton Cole",
-    "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe", "Andy Carroll",
-    "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert", "Charlie Austin",
-    "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson", "Dominic Calvert-Lewin",
-    "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi", "Yoane Wissa",
-    "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
-    "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
-    "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
     "Jay Rodriguez", "Rickie Lambert",
 ];
 
@@ -224,16 +171,16 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
           <div
             key={msg.id}
             className={cn(
-              "p-4 rounded-lg animate-fade-in",
+              "p-4 rounded-lg animate-fade-in inline-block",
               msg.isUser 
                 ? "bg-black text-white ml-auto" 
                 : isDarkMode 
-                  ? "bg-gray-800 text-gray-100" // Added text color for dark mode
+                  ? "bg-gray-800 text-gray-100"
                   : "bg-gray-50"
             )}
             style={{ maxWidth: "85%" }}
           >
-            <p className="text-sm">{msg.content}</p>
+            <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
           </div>
         ))
       ) : (
