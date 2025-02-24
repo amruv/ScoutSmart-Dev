@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import type { Conversation, Message } from "@/types/chat";
 
 export const useConversations = () => {
@@ -32,32 +33,75 @@ export const useConversations = () => {
     setActiveConversationId(newId);
   };
 
-  const addMessage = (message: string) => {
+  const addMessage = async (message: string) => {
     if (!message.trim()) return;
 
+    const userMessage: Message = {
+      id: activeConversation?.messages.length || 0 + 1,
+      content: message,
+      isUser: true,
+      timestamp: new Date(),
+    };
+
+    // Update UI immediately with user message
     const updatedConversations = conversations.map(conv => {
       if (conv.id === activeConversationId) {
-        const userMessage: Message = {
-          id: conv.messages.length + 1,
-          content: message,
-          isUser: true,
-          timestamp: new Date(),
-        };
-        const assistantMessage: Message = {
-          id: conv.messages.length + 2,
-          content: "I understand you're interested in football scouting. Let me analyze that for you...",
-          isUser: false,
-          timestamp: new Date(),
-        };
         return {
           ...conv,
-          messages: [...conv.messages, userMessage, assistantMessage],
+          messages: [...conv.messages, userMessage],
         };
       }
       return conv;
     });
-
     setConversations(updatedConversations);
+
+    try {
+      // Call OpenAI API through our edge function
+      const response = await supabase.functions.invoke('chat-with-ai', {
+        body: { message },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      const aiMessage: Message = {
+        id: (activeConversation?.messages.length || 0) + 2,
+        content: response.data.response,
+        isUser: false,
+        timestamp: new Date(),
+      };
+
+      // Update conversations with AI response
+      setConversations(conversations.map(conv => {
+        if (conv.id === activeConversationId) {
+          return {
+            ...conv,
+            messages: [...conv.messages, userMessage, aiMessage],
+          };
+        }
+        return conv;
+      }));
+    } catch (error) {
+      console.error('Error calling OpenAI:', error);
+      // Add error message to conversation
+      const errorMessage: Message = {
+        id: (activeConversation?.messages.length || 0) + 2,
+        content: "Sorry, I encountered an error while processing your request.",
+        isUser: false,
+        timestamp: new Date(),
+      };
+
+      setConversations(conversations.map(conv => {
+        if (conv.id === activeConversationId) {
+          return {
+            ...conv,
+            messages: [...conv.messages, errorMessage],
+          };
+        }
+        return conv;
+      }));
+    }
   };
 
   const handleRename = (conversation: Conversation, newTitle: string) => {
