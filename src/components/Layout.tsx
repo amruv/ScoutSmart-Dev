@@ -26,7 +26,7 @@ export const Layout = ({
 }: LayoutProps) => {
   return (
     <div className={cn(
-      "flex flex-col h-screen transition-colors duration-200",
+      "fixed inset-0 flex flex-col overflow-hidden",
       isDarkMode ? "bg-gray-900" : "bg-white"
     )}>
       <Header
@@ -38,11 +38,11 @@ export const Layout = ({
         onDarkModeToggle={onDarkModeToggle}
       />
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar */}
         <div
           className={cn(
-            "fixed left-0 top-16 h-[calc(100vh-4rem)] w-80 border-r transition-all duration-300 ease-in-out z-20",
+            "fixed left-0 top-16 h-[calc(100vh-4rem)] w-80 border-r transition-all duration-300 ease-in-out z-20 overflow-y-auto",
             isDarkMode ? "bg-gray-800 border-gray-700" : "bg-gray-50 border-gray-200",
             leftSidebarOpen ? "translate-x-0" : "-translate-x-full"
           )}
@@ -52,7 +52,7 @@ export const Layout = ({
 
         {/* Main Content */}
         <main className={cn(
-          "flex-1 h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out",
+          "flex-1 h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out mt-16",
           leftSidebarOpen ? "ml-80" : "ml-0",
           rightSidebarOpen ? "mr-80" : "mr-0",
           isDarkMode ? "bg-gray-900" : "bg-white"
