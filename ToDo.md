@@ -1,6 +1,8 @@
 # Things to implement
 
-brother, can you fix the size and the scrolling in the dark mode ands also in this 100% zoom ratio, the page itself  shouldn't be scrollable in the website
+Fixing LLM connection, why is openai api failing?
+
+try ussing anthropic + google for LLM as well
 
 Also, time to connect chat with LLM response
 
