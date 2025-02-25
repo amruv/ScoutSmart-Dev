@@ -13,9 +13,9 @@ import { useState } from "react";
 
 interface ChatListProps {
   conversations: Conversation[];
-  activeConversationId: number;
+  activeConversationId: string | null;
   isDarkMode: boolean;
-  onChatSelect: (id: number) => void;
+  onChatSelect: (id: string) => void;
   onRename: (conversation: Conversation) => void;
   onDelete?: (conversation: Conversation) => void;
 }
@@ -28,7 +28,7 @@ export const ChatList = ({
   onRename,
   onDelete,
 }: ChatListProps) => {
-  const [menuOpen, setMenuOpen] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
 
@@ -73,7 +73,7 @@ export const ChatList = ({
               <p className={cn(
                 "text-xs",
                 activeConversationId === conv.id ? "text-white/70" : isDarkMode ? "text-gray-300" : "text-gray-500"
-              )}>{conv.date}</p>
+              )}>{new Date(conv.created_at).toLocaleDateString()}</p>
             </div>
           </div>
           <div className="relative">

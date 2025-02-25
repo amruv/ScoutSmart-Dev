@@ -11,7 +11,7 @@ import type { Conversation } from "@/types/chat";
 
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
-  const [rightSidebarOpen, setRightSidebarOpen] = useState(false); // Changed to false by default
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [message, setMessage] = useState("");
   const [renameDialogOpen, setRenameDialogOpen] = useState(false);

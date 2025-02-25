@@ -5,10 +5,10 @@ import type { Conversation } from "@/types/chat";
 
 interface LeftSidebarProps {
   conversations: Conversation[];
-  activeConversationId: number;
+  activeConversationId: string | null;
   isDarkMode: boolean;
   onNewChat: () => void;
-  onChatSelect: (id: number) => void;
+  onChatSelect: (id: string) => void;
   onRename: (conversation: Conversation) => void;
   onDelete: (conversation: Conversation) => void;
   onLogout: () => void;
