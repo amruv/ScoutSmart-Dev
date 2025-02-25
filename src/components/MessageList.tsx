@@ -148,17 +148,6 @@ const MALE_PLAYERS = [
     "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen", "Dominic Solanke",
     "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge", "Jermain Defoe",
     "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez", "Rickie Lambert",
-    "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray", "Callum Wilson",
-    "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak", "Taiwo Awoniyi",
-    "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise", "Jarrod Bowen",
-    "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck", "Daniel Sturridge",
-    "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell", "Jay Rodriguez",
-    "Rickie Lambert", "Charlie Austin", "Glenn Murray", "Troy Deeney", "Andre Gray",
-    "Callum Wilson", "Dominic Calvert-Lewin", "Ollie Watkins", "Ivan Toney", "Alexander Isak",
-    "Taiwo Awoniyi", "Yoane Wissa", "Bryan Mbeumo", "Eberechi Eze", "Michael Olise",
-    "Jarrod Bowen", "Dominic Solanke", "Carlton Cole", "Victor Anichebe", "Danny Welbeck",
-    "Daniel Sturridge", "Jermain Defoe", "Andy Carroll", "Connor Wickham", "Fraizer Campbell",
-    "Jay Rodriguez", "Rickie Lambert",
 ];
 
 const LEGENDARY_PLAYERS = [...MALE_PLAYERS, ...FEMALE_PLAYERS];
@@ -171,16 +160,22 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
           <div
             key={msg.id}
             className={cn(
-              "p-4 rounded-lg animate-fade-in inline-block",
-              msg.isUser 
-                ? "bg-black text-white ml-auto" 
-                : isDarkMode 
-                  ? "bg-gray-800 text-gray-100"
-                  : "bg-gray-50"
+              "flex w-full",
+              msg.sender === 'USER' ? "justify-end" : "justify-start"
             )}
-            style={{ maxWidth: "85%" }}
           >
-            <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+            <div
+              className={cn(
+                "p-4 rounded-lg animate-fade-in max-w-[85%]",
+                msg.sender === 'USER' 
+                  ? "bg-black text-white rounded-br-none" 
+                  : isDarkMode 
+                    ? "bg-gray-800 text-gray-100 rounded-bl-none"
+                    : "bg-gray-50 rounded-bl-none"
+              )}
+            >
+              <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+            </div>
           </div>
         ))
       ) : (
