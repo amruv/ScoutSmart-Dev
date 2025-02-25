@@ -96,8 +96,8 @@ export const useConversations = () => {
         )
       );
 
-      // Call OpenAI API through edge function
-      const response = await supabase.functions.invoke('chat-with-ai', {
+      // Call Claude API through edge function
+      const response = await supabase.functions.invoke('chat-with-claude', {
         body: { message }
       });
 
