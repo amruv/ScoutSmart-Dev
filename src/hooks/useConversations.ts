@@ -96,8 +96,8 @@ export const useConversations = () => {
         )
       );
 
-      // Call Claude API through edge function
-      const response = await supabase.functions.invoke('chat-with-claude', {
+      // Call Gemini API through edge function
+      const response = await supabase.functions.invoke('chat-with-gemini', {
         body: { message }
       });
 
