@@ -84,7 +84,7 @@ export const ChatList = ({
               }}
               className={cn(
                 "p-1 rounded transition-colors",
-                isDarkMode ? "hover:bg-gray-600 text-gray-300" : "hover:bg-gray-300"
+                isDarkMode ? "hover:bg-gray-600 text-gray-300" : "hover:bg-gray-300 text-gray-700"
               )}
             >
               <MoreVertical className="h-4 w-4" />
@@ -92,7 +92,7 @@ export const ChatList = ({
             {menuOpen === conv.id && (
               <div className={cn(
                 "absolute right-0 mt-1 py-1 w-32 rounded-lg shadow-lg z-10",
-                isDarkMode ? "bg-gray-800 text-gray-100" : "bg-white"
+                isDarkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-700"
               )}>
                 <button
                   onClick={(e) => {
