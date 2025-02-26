@@ -179,18 +179,26 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
                 <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
               ) : (
                 <ReactMarkdown 
-                  className="text-sm prose prose-sm max-w-none break-words"
                   components={{
+                    div: ({children}) => <div className="text-sm prose prose-sm max-w-none break-words">{children}</div>,
                     p: ({node, ...props}) => <p className="whitespace-pre-wrap" {...props} />,
                     a: ({node, ...props}) => <a className="text-blue-400 hover:underline" {...props} target="_blank" rel="noopener noreferrer" />,
                     ul: ({node, ...props}) => <ul className="list-disc list-inside my-2" {...props} />,
                     ol: ({node, ...props}) => <ol className="list-decimal list-inside my-2" {...props} />,
                     li: ({node, ...props}) => <li className="my-1" {...props} />,
-                    code: ({node, inline, ...props}) => (
-                      inline 
-                        ? <code className="bg-gray-700 rounded px-1 py-0.5" {...props} />
-                        : <code className="block bg-gray-700 rounded p-2 my-2 overflow-x-auto" {...props} />
-                    )
+                    code: ({node, className, children, ...props}) => {
+                      const match = /language-(\w+)/.exec(className || '')
+                      const isInline = !className
+                      return isInline ? (
+                        <code className="bg-gray-700 rounded px-1 py-0.5" {...props}>
+                          {children}
+                        </code>
+                      ) : (
+                        <code className="block bg-gray-700 rounded p-2 my-2 overflow-x-auto" {...props}>
+                          {children}
+                        </code>
+                      )
+                    }
                   }}
                 >
                   {msg.content}
