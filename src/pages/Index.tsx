@@ -10,6 +10,17 @@ import { useFootballData } from "@/hooks/useFootballData";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Conversation } from "@/types/chat";
 
+// League ID mapping for common leagues
+const LEAGUE_IDS: { [key: string]: string } = {
+  'premier league': '39',
+  'la liga': '140',
+  'bundesliga': '78',
+  'serie a': '135',
+  'ligue 1': '61'
+};
+
+const CURRENT_SEASON = '2023';
+
 const Index = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
@@ -35,14 +46,45 @@ const Index = () => {
     handleDelete,
   } = useConversations();
 
+  const parseMessageForParams = (message: string) => {
+    const msg = message.toLowerCase();
+    
+    // Extract league
+    let league = '39'; // Default to Premier League
+    Object.entries(LEAGUE_IDS).forEach(([name, id]) => {
+      if (msg.includes(name.toLowerCase())) {
+        league = id;
+      }
+    });
+
+    // Extract team name - looking for patterns like "show me X's performance" or "X's stats"
+    let team = '';
+    const teamMatch = msg.match(/(?:show me |get )([a-zA-Z ]+?)(?:'s|\s+in\s+)/i);
+    if (teamMatch && teamMatch[1]) {
+      team = teamMatch[1].trim();
+    }
+
+    // Extract season - default to current if not specified
+    let season = CURRENT_SEASON;
+    const seasonMatch = msg.match(/20\d{2}/);
+    if (seasonMatch) {
+      season = seasonMatch[0];
+    }
+
+    return { league, team, season };
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // If the message contains a command to fetch football data
     if (message.toLowerCase().includes('!stats')) {
+      const { league, team, season } = parseMessageForParams(message);
+      
       const data = await fetchData('teams/statistics', {
-        league: '39', // Premier League
-        season: '2023'
+        league,
+        season,
+        team,
       });
       
       // Add the stats to the message before sending to the LLM
