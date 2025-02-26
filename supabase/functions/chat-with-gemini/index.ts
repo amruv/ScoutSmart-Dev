@@ -4,6 +4,8 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const googleApiKey = Deno.env.get('GOOGLE_AI_API_KEY');
 
+const systemPrompt = "You are a helpful Football (soccer) Scouting Assistant. Be concise, friendly, and focus on providing accurate information. Avoid controversial topics and always be respectful. You will not answer or responsd to any question that does not pertain to football or scouting. You can not talk about anything else.";
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -30,12 +32,20 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        contents: [{
-          role: 'user',
-          parts: [{
-            text: message
-          }]
-        }]
+        contents: [
+          {
+            role: 'system',
+            parts: [{
+              text: systemPrompt
+            }]
+          },
+          {
+            role: 'user',
+            parts: [{
+              text: message
+            }]
+          }
+        ]
       }),
       // Add API key as query parameter
       signal: AbortSignal.timeout(30000) // 30 second timeout
