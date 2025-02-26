@@ -60,12 +60,20 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        contents: [{
-          role: 'user',
-          parts: [{
-            text: message
-          }]
-        }]
+        contents: [
+          {
+            role: 'system',
+            parts: [{
+              text: systemPrompt
+            }]
+          },
+          {
+            role: 'user',
+            parts: [{
+              text: message
+            }]
+          }
+        ]
       }),
     });
 
