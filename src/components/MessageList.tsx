@@ -1,11 +1,7 @@
 import { cn } from "@/lib/utils";
 import { PlayerNameCarousel } from "@/components/PlayerNameCarousel";
 import type { Message } from "@/types/chat";
-
-interface MessageListProps {
-  messages: Message[];
-  isDarkMode: boolean;
-}
+import ReactMarkdown from 'react-markdown';
 
 // Female Players (100)
 const FEMALE_PLAYERS = [
@@ -152,6 +148,11 @@ const MALE_PLAYERS = [
 
 const LEGENDARY_PLAYERS = [...MALE_PLAYERS, ...FEMALE_PLAYERS];
 
+interface MessageListProps {
+  messages: Message[];
+  isDarkMode: boolean;
+}
+
 export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -174,7 +175,27 @@ export const MessageList = ({ messages, isDarkMode }: MessageListProps) => {
                     : "bg-gray-50 rounded-bl-none"
               )}
             >
-              <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+              {msg.sender === 'USER' ? (
+                <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+              ) : (
+                <ReactMarkdown 
+                  className="text-sm prose prose-sm max-w-none break-words"
+                  components={{
+                    p: ({node, ...props}) => <p className="whitespace-pre-wrap" {...props} />,
+                    a: ({node, ...props}) => <a className="text-blue-400 hover:underline" {...props} target="_blank" rel="noopener noreferrer" />,
+                    ul: ({node, ...props}) => <ul className="list-disc list-inside my-2" {...props} />,
+                    ol: ({node, ...props}) => <ol className="list-decimal list-inside my-2" {...props} />,
+                    li: ({node, ...props}) => <li className="my-1" {...props} />,
+                    code: ({node, inline, ...props}) => (
+                      inline 
+                        ? <code className="bg-gray-700 rounded px-1 py-0.5" {...props} />
+                        : <code className="block bg-gray-700 rounded p-2 my-2 overflow-x-auto" {...props} />
+                    )
+                  }}
+                >
+                  {msg.content}
+                </ReactMarkdown>
+              )}
             </div>
           </div>
         ))
