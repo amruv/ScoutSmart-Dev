@@ -34,7 +34,7 @@ serve(async (req) => {
       body: JSON.stringify({
         contents: [
           {
-            role: 'system',
+            role: 'user',
             parts: [{
               text: systemPrompt
             }]
