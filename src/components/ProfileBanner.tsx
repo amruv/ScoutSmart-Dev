@@ -72,7 +72,7 @@ export const ProfileBanner = ({
             </div>
             <div className="flex-1 text-left">
               <p className={cn(
-                "text-sm font-medium",
+                "text-lg font-medium",
                 isDarkMode ? "text-gray-100" : "text-gray-900"
               )}>{displayName || 'User'}</p>
             </div>
