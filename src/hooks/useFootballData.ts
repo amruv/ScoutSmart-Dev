@@ -7,6 +7,8 @@ interface FootballData {
   teams?: any[];
   players?: any[];
   matches?: any[];
+  statistics?: any;
+  standings?: any[];
   // Add more types as needed
 }
 
@@ -21,9 +23,16 @@ export const useFootballData = () => {
         body: { endpoint, params }
       });
 
-      if (response.error) throw response.error;
-      
+      if (response.error) {
+        toast.error('Failed to fetch football data');
+        throw response.error;
+      }
+
+      console.log('Football data response:', response.data);
       setData(response.data);
+      
+      // Show success message
+      toast.success('Football data fetched successfully');
       return response.data;
     } catch (error) {
       console.error('Error fetching football data:', error);
