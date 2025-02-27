@@ -1,10 +1,17 @@
 # Things to implement
 
-Fixing LLM connection, why is openai api failing?
+Currently using Gemini API for llm backend.
 
-try ussing anthropic + google for LLM as well
+Research on ai generatedgraphs and embeddings of any such model/company.
 
-Also, time to connect chat with LLM response
+Sign up to statsperform and just check what's up and the pricing.
+
+Time to create a settings page.
+
+Time to make sure, upload file an upload photo actually work. Also, take input as voice as well?
+
+------
+
 
 Research on which tools to use in rendering Compare Graphs (check out Sqwuaka), The athletic style bar + Scatter Plot etc etc. Heat map and everything. Render with !Graph and !Table !Map, etc, save as Image (and/or Python code if possible)
 
