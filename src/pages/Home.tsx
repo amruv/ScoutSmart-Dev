@@ -1,8 +1,9 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { PlayerNameCarousel, gradientTextStyles } from '@/components/PlayerNameCarousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const FEATURED_PLAYERS = [
   "Erling Haaland",
@@ -12,11 +13,59 @@ const FEATURED_PLAYERS = [
   "Marcus Rashford"
 ];
 
+const CLIENT_LOGOS = [
+  { name: "Client 1", logo: "placeholder.svg" },
+  { name: "Client 2", logo: "placeholder.svg" },
+  { name: "Client 3", logo: "placeholder.svg" },
+  { name: "Client 4", logo: "placeholder.svg" },
+  { name: "Client 5", logo: "placeholder.svg" },
+  { name: "Client 6", logo: "placeholder.svg" },
+];
+
 const COMPANY_STATS = [
   { value: "150+", label: "Data points per player" },
   { value: "30+", label: "Leagues covered" },
   { value: "50+", label: "Trusted clients" },
   { value: "10K+", label: "Players analyzed" },
+];
+
+const BLOG_POSTS = [
+  {
+    title: "Advanced Player Analytics",
+    excerpt: "Discover how our AI-powered analytics are revolutionizing scouting.",
+    date: "2024-02-20",
+  },
+  {
+    title: "Scouting Network Expansion",
+    excerpt: "We're now covering more leagues and tournaments than ever before.",
+    date: "2024-02-15",
+  },
+  {
+    title: "New Partnership Announcement",
+    excerpt: "Exciting collaboration with leading football academies.",
+    date: "2024-02-10",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote: "ScoutSmart has transformed our scouting process completely.",
+    author: "John Smith",
+    position: "Head Scout",
+    company: "Premier League Club",
+  },
+  {
+    quote: "The depth of data analysis is unprecedented.",
+    author: "Maria Garcia",
+    position: "Technical Director",
+    company: "La Liga Club",
+  },
+  {
+    quote: "A game-changer for modern football scouting.",
+    author: "Thomas Mueller",
+    position: "Academy Director",
+    company: "Bundesliga Club",
+  },
 ];
 
 export default function Home() {
@@ -37,7 +86,9 @@ export default function Home() {
             onMouseLeave={() => setIsHovered(false)}
             className="relative group px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
             style={{
-              background: "linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%, rgba(246,219,245,1) 89%)",
+              backgroundImage: "linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%, rgba(246,219,245,1) 89%)",
+              backgroundSize: "200% 200%",
+              animation: "gradient-shift 3s ease infinite",
             }}
           >
             <span className="flex items-center text-white font-medium">
@@ -63,8 +114,29 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Client Logos Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl font-semibold text-center mb-12">Trusted by Leading Clubs</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {CLIENT_LOGOS.map((client, index) => (
+              <div 
+                key={index}
+                className="aspect-square bg-white rounded-lg shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow duration-300"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="w-20 h-20 object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {COMPANY_STATS.map((stat, index) => (
@@ -82,52 +154,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Developments Section */}
-      <section className="py-20">
+      {/* Blog Posts Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">Latest Developments</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((_, index) => (
-              <div 
-                key={index}
-                className="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                <div className="h-48 bg-gray-200" />
-                <div className="p-6">
-                  <h3 className="font-semibold mb-2">Coming Soon</h3>
-                  <p className="text-gray-600">
-                    Stay tuned for exciting updates and developments from our team.
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold mb-12 text-center">Latest Updates</h2>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-5xl mx-auto"
+          >
+            <CarouselContent>
+              {BLOG_POSTS.map((post, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 className="font-semibold mb-2">{post.title}</h3>
+                    <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                    <span className="text-sm text-gray-400">{post.date}</span>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center">What Our Clients Say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((_, index) => (
-              <div 
-                key={index}
-                className="p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
-              >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-200 mr-4" />
-                  <div>
-                    <h3 className="font-semibold">Coming Soon</h3>
-                    <p className="text-gray-600">Position, Company</p>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {TESTIMONIALS.map((testimonial, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="mb-4">
+                      <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
+                      <div>
+                        <h3 className="font-semibold">{testimonial.author}</h3>
+                        <p className="text-gray-600">{testimonial.position}</p>
+                        <p className="text-gray-400">{testimonial.company}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <p className="text-gray-600">
-                  "Testimonials from our satisfied clients will appear here soon."
-                </p>
-              </div>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
     </div>
