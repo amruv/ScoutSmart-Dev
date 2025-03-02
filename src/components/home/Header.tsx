@@ -51,6 +51,9 @@ export function Header() {
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
           Advanced analytics and scouting tools powered by cutting-edge AI technology
         </p>
+        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          Find the Next...
+        </p>
         <PlayerNameCarousel players={FEATURED_PLAYERS} />
       </div>
     </header>
