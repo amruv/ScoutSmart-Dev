@@ -84,7 +84,7 @@ export const ChatList = ({
               }}
               className={cn(
                 "p-1 rounded transition-colors",
-                isDarkMode ? "hover:bg-gray-600 text-gray-300" : "hover:bg-gray-300 text-gray-700"
+                isDarkMode ? "hover:bg-gray-600 text-gray-300" : "hover:bg-gray-300 text-white-700"
               )}
             >
               <MoreVertical className="h-4 w-4" />
