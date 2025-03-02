@@ -1,6 +1,8 @@
 
+import { useRef } from "react";
 import { Paperclip, ArrowUpRight, FileUp, Image } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,14 +23,39 @@ export const ChatInput = ({
   onMessageChange,
   onSubmit,
 }: ChatInputProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const photoInputRef = useRef<HTMLInputElement>(null);
+
   const handleFileUpload = () => {
-    // File upload logic will go here
-    console.log("File upload clicked");
+    fileInputRef.current?.click();
   };
 
   const handlePhotoUpload = () => {
-    // Photo upload logic will go here
-    console.log("Photo upload clicked");
+    photoInputRef.current?.click();
+  };
+
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      // Here you would normally upload the file to your backend
+      toast.success(`File selected: ${file.name}`);
+      
+      // For now, we'll just add the file name to the message
+      onMessageChange(message + ` [File: ${file.name}]`);
+    }
+  };
+
+  const handlePhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      // Here you would normally upload the image to your backend
+      toast.success(`Image selected: ${file.name}`);
+      
+      // For now, we'll just add the image name to the message
+      onMessageChange(message + ` [Image: ${file.name}]`);
+    }
   };
 
   return (
@@ -73,6 +100,25 @@ export const ChatInput = ({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      
+      {/* Hidden file input for document uploads */}
+      <input 
+        ref={fileInputRef}
+        type="file"
+        onChange={handleFileSelected}
+        className="hidden"
+        accept=".pdf,.doc,.docx,.txt,.csv"
+      />
+      
+      {/* Hidden file input for image uploads */}
+      <input 
+        ref={photoInputRef}
+        type="file"
+        onChange={handlePhotoSelected}
+        className="hidden"
+        accept="image/*"
+      />
+      
       <input
         type="text"
         value={message}

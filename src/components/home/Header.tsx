@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PlayerNameCarousel, gradientTextStyles } from '@/components/PlayerNameCarousel';
 
@@ -13,7 +13,6 @@ const FEATURED_PLAYERS = [
 ];
 
 export function Header() {
-  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -22,8 +21,8 @@ export function Header() {
         <h1 className="text-2xl font-bold" style={gradientTextStyles}>
           ScoutSmart
         </h1>
-        <button
-          onClick={() => navigate('/auth')}
+        <Link
+          to="/auth"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className="relative group px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
@@ -42,7 +41,7 @@ export function Header() {
               size={18}
             />
           </span>
-        </button>
+        </Link>
       </nav>
 
       <div className="max-w-4xl mx-auto text-center space-y-8">
