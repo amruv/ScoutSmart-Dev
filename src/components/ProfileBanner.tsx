@@ -58,9 +58,9 @@ export const ProfileBanner = ({
 
   return (
     <div className={cn(
-      "absolute bottom-0 left-0 right-0 border-t p-4 text-lg",
+      "absolute bottom-0 left-0 right-0 border-t p-4 text-lg w-[318px] h-[83px]",
       isDarkMode ? "border-gray-700 bg-gray-800" : "border-gray-200 bg-gray-50"
-    )}>
+    )} >
       <DropdownMenu>
         <DropdownMenuTrigger className="w-full">
           <div className={cn(
