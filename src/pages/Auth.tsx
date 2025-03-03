@@ -1,9 +1,10 @@
 
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 import { gradientTextStyles } from "@/components/PlayerNameCarousel";
+import { toast } from "sonner";
 
 const Auth = () => {
   const { signIn, signUp, error, user } = useAuth();
@@ -11,17 +12,30 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   if (user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isLogin) {
-      await signIn(email, password);
-    } else {
-      await signUp(email, password, displayName);
+    try {
+      if (isLogin) {
+        await signIn(email, password);
+        // If successful, useEffect will handle the redirect
+      } else {
+        await signUp(email, password, displayName);
+        // If successful, useEffect will handle the redirect
+      }
+    } catch (err) {
+      toast.error("Authentication failed. Please try again.");
     }
   };
 
