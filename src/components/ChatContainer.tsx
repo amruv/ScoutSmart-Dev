@@ -20,7 +20,7 @@ export const ChatContainer = ({
   onSubmit,
 }: ChatContainerProps) => {
   return (
-    <div className="flex items-center bg-gray-100 rounded-2xl px-4 py-2 shadow-md w-full max-w-2xl">
+    <div className="h-full flex flex-col">
       <div className="flex-1 p-4 overflow-y-auto min-h-0">
         <MessageList messages={messages} isDarkMode={isDarkMode} />
       </div>
