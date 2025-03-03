@@ -59,7 +59,7 @@ export const ChatInput = ({
   };
 
   return (
-    <form className="flex items-center bg-gray-100 rounded-2xl px-4 py-2 shadow-md w-full max-w-2xl" onSubmit={onSubmit}>
+    <form className="flex items-center space-x-4" onSubmit={onSubmit}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
