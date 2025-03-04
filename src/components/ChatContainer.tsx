@@ -25,10 +25,10 @@ export const ChatContainer = ({
         <MessageList messages={messages} isDarkMode={isDarkMode} />
       </div>
       <div className={cn(
-        "border-t p-4 mt-auto",
+        "flex justify-center p-4",
         isDarkMode ? "border-gray-700" : "border-gray-200"
       )}>
-        <div className="max-w-[75%] mx-auto">
+        <div className="max-w-[75%] mx-auto w-3/4">
           <ChatInput
             message={message}
             isDarkMode={isDarkMode}
