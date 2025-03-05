@@ -66,7 +66,7 @@ export const ChatInput = ({
             type="button"
             className={cn(
               "p-2 rounded-lg transition-colors",
-              isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100 text-gray-200"
+              isDarkMode ? "" : "text-gray-200"
             )}
           >
             <Paperclip className="h-5 w-5" />
