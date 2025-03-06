@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
 import { RightSidebar } from "@/components/RightSidebar";
@@ -12,6 +11,7 @@ interface LayoutProps {
   onLeftSidebarToggle: () => void;
   onRightSidebarToggle: () => void;
   onDarkModeToggle: (checked: boolean) => void;
+  onNewChat: () => void;
 }
 
 export const Layout = ({
@@ -23,6 +23,7 @@ export const Layout = ({
   onLeftSidebarToggle,
   onRightSidebarToggle,
   onDarkModeToggle,
+  onNewChat,
 }: LayoutProps) => {
   return (
     <div className={cn(
@@ -36,6 +37,7 @@ export const Layout = ({
         onLeftSidebarToggle={onLeftSidebarToggle}
         onRightSidebarToggle={onRightSidebarToggle}
         onDarkModeToggle={onDarkModeToggle}
+        onNewChat={onNewChat}
       />
 
       <div className="flex flex-1 overflow-hidden">

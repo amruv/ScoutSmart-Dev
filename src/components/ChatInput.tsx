@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import { Paperclip, ArrowUpRight, FileUp, Image } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -38,10 +37,7 @@ export const ChatInput = ({
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      // Here you would normally upload the file to your backend
       toast.success(`File selected: ${file.name}`);
-      
-      // For now, we'll just add the file name to the message
       onMessageChange(message + ` [File: ${file.name}]`);
     }
   };
@@ -50,23 +46,23 @@ export const ChatInput = ({
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      // Here you would normally upload the image to your backend
       toast.success(`Image selected: ${file.name}`);
-      
-      // For now, we'll just add the image name to the message
       onMessageChange(message + ` [Image: ${file.name}]`);
     }
   };
 
   return (
-    <form className={cn("flex items-center rounded-2xl px-4 py-2 shadow-md w-full", isDarkMode ? "bg-gray-200" : "bg-gray-700")}onSubmit={onSubmit}>
+    <form className={cn(
+      "flex items-center gap-4 rounded-2xl px-6 py-4 shadow-md w-full max-w-4xl mx-auto",
+      isDarkMode ? "bg-gray-800" : "bg-white border border-gray-200"
+    )} onSubmit={onSubmit}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
             type="button"
             className={cn(
-              "p-2 rounded-lg transition-colors",
-              isDarkMode ? "" : "text-gray-200"
+              "p-2.5 rounded-lg transition-colors hover:bg-gray-100",
+              isDarkMode ? "text-gray-200 hover:bg-gray-700" : "text-gray-600"
             )}
           >
             <Paperclip className="h-5 w-5" />
@@ -101,7 +97,6 @@ export const ChatInput = ({
         </DropdownMenuContent>
       </DropdownMenu>
       
-      {/* Hidden file input for document uploads */}
       <input 
         ref={fileInputRef}
         type="file"
@@ -110,7 +105,6 @@ export const ChatInput = ({
         accept=".pdf,.doc,.docx,.txt,.csv"
       />
       
-      {/* Hidden file input for image uploads */}
       <input 
         ref={photoInputRef}
         type="file"
@@ -125,17 +119,17 @@ export const ChatInput = ({
         onChange={(e) => onMessageChange(e.target.value)}
         placeholder="Ask about player analysis, scouting reports, or talent identification..."
         className={cn(
-          "flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 transition-all",
+          "flex-1 p-3 rounded-lg focus:outline-none focus:ring-2 transition-all",
           isDarkMode 
-            ? "bg-gray-800 border-gray-700 focus:ring-gray-600 text-gray-100 placeholder:text-gray-400" 
-            : "bg-white border-gray-200 focus:ring-gray-200"
+            ? "bg-gray-700 text-gray-100 placeholder:text-gray-400 focus:ring-gray-600" 
+            : "bg-gray-50 focus:ring-gray-200"
         )}
       />
       <button
         type="submit"
         className={cn(
-          "p-2 bg-black text-white rounded-lg transition-colors",
-          isDarkMode ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-800"
+          "p-2.5 bg-black text-white rounded-lg transition-colors",
+          isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-800"
         )}
       >
         <ArrowUpRight className="h-5 w-5" />

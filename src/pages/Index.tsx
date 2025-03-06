@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { LeftSidebar } from "@/components/LeftSidebar";
@@ -10,7 +9,6 @@ import { useFootballData } from "@/hooks/useFootballData";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Conversation } from "@/types/chat";
 
-// League ID mapping for common leagues
 const LEAGUE_IDS: { [key: string]: string } = {
   'premier league': '39',
   'la liga': '140',
@@ -49,7 +47,6 @@ const Index = () => {
   const parseMessageForParams = (message: string) => {
     const msg = message.toLowerCase();
     
-    // Extract league
     let league = '39'; // Default to Premier League
     Object.entries(LEAGUE_IDS).forEach(([name, id]) => {
       if (msg.includes(name.toLowerCase())) {
@@ -57,14 +54,12 @@ const Index = () => {
       }
     });
 
-    // Extract team name - looking for patterns like "show me X's performance" or "X's stats"
     let team = '';
     const teamMatch = msg.match(/(?:show me |get )([a-zA-Z ]+?)(?:'s|\s+in\s+)/i);
     if (teamMatch && teamMatch[1]) {
       team = teamMatch[1].trim();
     }
 
-    // Extract season - default to current if not specified
     let season = CURRENT_SEASON;
     const seasonMatch = msg.match(/20\d{2}/);
     if (seasonMatch) {
@@ -77,7 +72,6 @@ const Index = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // If the message contains a command to fetch football data
     if (message.toLowerCase().includes('!stats')) {
       const { league, team, season } = parseMessageForParams(message);
       
@@ -87,7 +81,6 @@ const Index = () => {
         team,
       });
       
-      // Add the stats to the message before sending to the LLM
       const enhancedMessage = `${message}\n\nTeam Statistics:\n${JSON.stringify(data, null, 2)}`;
       addMessage(enhancedMessage);
     } else {
@@ -134,6 +127,7 @@ const Index = () => {
       onLeftSidebarToggle={() => setLeftSidebarOpen(!leftSidebarOpen)}
       onRightSidebarToggle={() => setRightSidebarOpen(!rightSidebarOpen)}
       onDarkModeToggle={setIsDarkMode}
+      onNewChat={handleNewChat}
       leftSidebar={
         <LeftSidebar
           conversations={conversations}
