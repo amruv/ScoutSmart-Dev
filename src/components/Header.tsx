@@ -42,7 +42,7 @@ export const Header = ({
           <PenSquare className="h-5 w-5" />
         </button>
         <h1 
-          className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent animate-gradient"
+          className="text-2xl font-semibold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent animate-gradient"
         >
           ScoutSmart
         </h1>
