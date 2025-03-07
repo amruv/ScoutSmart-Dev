@@ -47,7 +47,7 @@ export const Header = ({
           ScoutSmart
         </h1>
       </div>
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-6"> 
         <div className="flex items-center space-x-2">
           <Sun className="h-4 w-4" />
           <Switch checked={isDarkMode} onCheckedChange={onDarkModeToggle} />
