@@ -1,6 +1,6 @@
-#ScoutSmart (in Development)
+# ScoutSmart (in Development)
 
-##Football Scouting. Simplified. Accessible. Incredibly Powerful.
+## Football Scouting. Simplified. Accessible. Incredibly Powerful.
 
 
 •AI-powered football scouting platform built with React, TypeScript and Google Gemini that helps users discover and analyze the next generation of football talent. 
